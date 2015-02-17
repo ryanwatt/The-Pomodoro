@@ -46,7 +46,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Rounds";
+    self.title = @"Huevodoro";
 
     self.dataSource = [PORoundTableViewDataSource new];
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
@@ -54,8 +54,10 @@
         
     self.tableView.dataSource = self.dataSource;
     self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
  
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"restCell"];
  
     [self selectCurrentRound];
     [self updateTimer];

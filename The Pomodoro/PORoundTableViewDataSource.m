@@ -28,10 +28,20 @@ static NSString * const CurrentRoundKey = @"CurrentRound";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    cell.textLabel.text = [NSString stringWithFormat:@"Round %ld - %@ min", indexPath.row + 1, [[[self times] objectAtIndex:indexPath.row] stringValue]];
     
-    return cell;
+    if (indexPath.row % 2 == 0){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        cell.textLabel.text = [NSString stringWithFormat:@"%ld. Enfocarse por %@ min", indexPath.row + 1, [[[self times] objectAtIndex:indexPath.row] stringValue]];
+        cell.textLabel.textColor = [UIColor darkGrayColor];
+        
+        return cell;
+    } else {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"restCell"];
+        cell.textLabel.text = [NSString stringWithFormat:@"%ld. Descansar por %@ min", indexPath.row + 1, [[[self times] objectAtIndex:indexPath.row] stringValue]];
+        cell.textLabel.textColor = [UIColor grayColor];
+        
+        return cell;
+    }
 }
 
 - (NSNumber *)roundAtIndex:(NSInteger)index {

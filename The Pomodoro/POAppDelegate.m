@@ -18,18 +18,18 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     PORoundsViewController *historyViewController = [PORoundsViewController new];
-    historyViewController.tabBarItem.title = @"Rounds";
+    historyViewController.tabBarItem.title = @"Huevos";
     historyViewController.tabBarItem.image = [UIImage imageNamed:@"rounds"];
 
     POTimerViewController *timerViewController = [POTimerViewController new];
-    timerViewController.tabBarItem.title = @"Timer";
+    timerViewController.tabBarItem.title = @"Tiempo";
     timerViewController.tabBarItem.image = [UIImage imageNamed:@"timer"];
 
     UITabBarController *tabBarController = [UITabBarController new];
     tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:historyViewController], [[UINavigationController alloc] initWithRootViewController:timerViewController]];
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
-    [[UITabBar appearance] setTintColor:[UIColor redColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:1.0 green:0.8 blue:0.05 alpha:1]];
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:1.0 green:0.8 blue:0.05 alpha:1]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            NSForegroundColorAttributeName: [UIColor whiteColor],

@@ -50,9 +50,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Focus";
+    self.title = @"¡Empezar!";
     
-    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.05 alpha:1];
     
     [self updateLabel];
     
