@@ -61,6 +61,7 @@ NSString * const SecondTickNotification = @"SecondTick";
 
     if (self.seconds > 0){
         self.seconds--;
+        [[NSNotificationCenter defaultCenter] postNotificationName:SecondTickNotification object:nil userInfo:nil];
     }
     
     if (self.minutes > 0){
