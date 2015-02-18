@@ -25,10 +25,14 @@
     timerViewController.tabBarItem.title = @"Tiempo";
     timerViewController.tabBarItem.image = [UIImage imageNamed:@"timer"];
 
-    UITabBarController *tabBarController = [UITabBarController new];
-    tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:historyViewController], [[UINavigationController alloc] initWithRootViewController:timerViewController]];
+    self.tabBarController = [UITabBarController new];
+    self.tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:historyViewController], [[UINavigationController alloc] initWithRootViewController:timerViewController]];
+    self.tabBarController.delegate = self;
+    
+    
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:1.0 green:0.8 blue:0.05 alpha:1]];
+    [[UINavigationBar appearance] ];
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:1.0 green:0.8 blue:0.05 alpha:1]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
@@ -36,12 +40,19 @@
                                                            NSFontAttributeName: [UIFont fontWithName:@"Avenir-Light" size:20]
                                                            }];
         
-    self.window.rootViewController = tabBarController;
+    self.window.rootViewController = self.tabBarController;
     
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+-(void)switchTab
+{
+    [self.tabBarController.delegate tabBarController:self.tabBarController shouldSelectViewController:[[self.tabBarController viewControllers] objectAtIndex:1]];
+    [self.tabBarController setSelectedIndex:1];
+    [self.tabBarController selectedViewController];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface POAppDelegate : UIResponder <UIApplicationDelegate>
+@interface POAppDelegate : UIResponder <UIApplicationDelegate, UITabBarDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UITabBarController *tabBarController;
+
+-(void)switchTab;
 
 @end

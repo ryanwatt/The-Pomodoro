@@ -6,13 +6,14 @@
 //  Copyright (c) 2014 DevMountain. All rights reserved.
 //
 
+#import "POAppDelegate.h"
 #import "PORoundsViewController.h"
 #import "POTimerViewController.h"
 
 #import "PORoundTableViewDataSource.h"
 #import "POTimer.h"
 
-@interface PORoundsViewController () <UITableViewDelegate>
+@interface PORoundsViewController () <UITableViewDelegate, UITabBarDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) PORoundTableViewDataSource *dataSource;
@@ -58,6 +59,8 @@
  
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"restCell"];
+    
+ 
  
     [self selectCurrentRound];
     [self updateTimer];
@@ -66,6 +69,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.dataSource.currentRound = indexPath.row;
+    POAppDelegate *tabBar = [POAppDelegate new];
+    [tabBar switchTab];
     [self updateTimer];
 }
 
@@ -93,6 +98,11 @@
                                 animated:NO
                           scrollPosition:UITableViewScrollPositionTop];
 
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
 }
 
 @end
