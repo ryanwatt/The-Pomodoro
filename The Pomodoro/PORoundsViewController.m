@@ -69,8 +69,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.dataSource.currentRound = indexPath.row;
-    POAppDelegate *tabBar = [POAppDelegate new];
-    [tabBar switchTab];
+    [self.navigationController.tabBarController setSelectedViewController:[[self.navigationController.tabBarController viewControllers] objectAtIndex:1]];
     [self updateTimer];
 }
 

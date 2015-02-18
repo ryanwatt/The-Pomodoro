@@ -17,22 +17,21 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    PORoundsViewController *historyViewController = [PORoundsViewController new];
-    historyViewController.tabBarItem.title = @"Huevos";
-    historyViewController.tabBarItem.image = [UIImage imageNamed:@"rounds"];
+    PORoundsViewController *roundsViewController = [PORoundsViewController new];
+    roundsViewController.tabBarItem.title = @"Huevos";
+    roundsViewController.tabBarItem.image = [UIImage imageNamed:@"rounds"];
 
     POTimerViewController *timerViewController = [POTimerViewController new];
     timerViewController.tabBarItem.title = @"Tiempo";
     timerViewController.tabBarItem.image = [UIImage imageNamed:@"timer"];
 
     self.tabBarController = [UITabBarController new];
-    self.tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:historyViewController], [[UINavigationController alloc] initWithRootViewController:timerViewController]];
+    self.tabBarController.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:roundsViewController], [[UINavigationController alloc] initWithRootViewController:timerViewController]];
     self.tabBarController.delegate = self;
     
     
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:1.0 green:0.8 blue:0.05 alpha:1]];
-    [[UINavigationBar appearance] ];
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:1.0 green:0.8 blue:0.05 alpha:1]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
@@ -74,7 +73,17 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert) categories:nil]];
+        [application registerForRemoteNotifications];
+    }else{
+        [application registerForRemoteNotificationTypes:(UIRemoteNotificationType)(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    }
+}
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [[[UIAlertView alloc] initWithTitle:@"El tiempo se ha terminado." message:notification.alertBody delegate:nil cancelButtonTitle:@"Muy Bien" otherButtonTitles:nil] show];
+    
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

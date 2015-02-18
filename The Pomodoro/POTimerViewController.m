@@ -62,6 +62,19 @@
     [[POTimer sharedInstance] startTimer];
     self.button.enabled = NO;
     [self.button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    
+    //This is for setting notifications
+    NSDate *alertTime = [[NSDate date] dateByAddingTimeInterval:10];
+    UILocalNotification *localNotification = [UILocalNotification new];
+    if (localNotification) {
+        localNotification.fireDate = alertTime;
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        localNotification.repeatInterval = 0;
+        localNotification.soundName = @"bell_tree.mp3";
+        localNotification.alertBody = @"El tiempo se ha terminado.";
+        localNotification.applicationIconBadgeNumber = 1;
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    }
 }
 
 - (void)newRound:(NSNotification *)notification {    
